@@ -11,7 +11,6 @@ export default function ImageSlider() {
 
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
-
   // Auto slide every 3 seconds
   useEffect(() => {
     if (!paused) {
