@@ -12,7 +12,7 @@ const Logo = () => {
 
                 <div>
                     <h1 className="text-lg sm:text-xl font-bold text-[#7f0210]">
-                        Shaheed Udham Singh Nagar Trust
+                        Shaheed Udham Singh Rakt Sewa Trust
                     </h1>
                     <p className="text-[#7f0210] text-xs sm:text-sm">
                         Sitarganj, Udham Singh Nagar, Uttarakhand - 262405
