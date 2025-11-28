@@ -11,7 +11,7 @@ const Slider = () => {
             class="bg-white py-1"
         >
             <span class="text-[#7f0210] font-semibold">
-                Shaheed Udham Singh Nagar Trust — 🩸 Be a life saver! 🩸
+                Shaheed Udham Singh Rakt Sewa Trust — 🩸 Be a life saver! 🩸
             </span>
         </marquee>
     )
