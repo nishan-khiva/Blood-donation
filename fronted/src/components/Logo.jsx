@@ -26,7 +26,7 @@ const Logo = () => {
                 {/* Social Icons */}
                 <div className="flex items-center space-x-4 sm:space-x-5 text-base sm:text-lg mb-2">
                     <a
-                        href="https://facebook.com"
+                        href="https://www.facebook.com/gurbeer.johal"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-[#1877F2] hover:opacity-80"
@@ -34,7 +34,7 @@ const Logo = () => {
                         <FaFacebookF />
                     </a>
                     <a
-                        href="https://instagram.com"
+                        href="https://www.instagram.com/susrstrust/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-[#E4405F] hover:opacity-80"
