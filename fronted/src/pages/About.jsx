@@ -3,20 +3,6 @@ import founderImg from "../assets/Gurveerimg.jpeg";
 
 const About = () => {
     return (
-        // <div className="py-16 bg-white text-center">
-        //     <div className="max-w-5xl mx-auto px-6">
-        //         <h3 className="text-3xl font-bold text-red-600 mb-6">
-        //             About Our Trust
-        //         </h3>
-        //         <p className="text-lg text-gray-700 leading-relaxed">
-        //             Shaheed Udham Singh Nagar Trust is a non-profit organization dedicated
-        //             to promoting blood donation and community welfare. Inspired by the
-        //             bravery and sacrifice of Shaheed Udham Singh, we strive to bring hope,
-        //             health, and humanity together.
-        //         </p>
-        //     </div>
-        // </div>
-
         <div className="max-w-6xl mx-auto px-6 py-12">
 
             {/* Header */}
@@ -40,6 +26,36 @@ const About = () => {
                     Our dedicated team is available 24/7 to ensure timely blood support
                     and promote voluntary blood donation.
                 </p>
+
+                {/* New Long About Section */}
+                <p className="mt-6">
+                    Our NGO works especially for patients suffering from <strong>Thalassemia</strong>,
+                    <strong> cancer</strong>, and other critical diseases that require regular and timely blood
+                    transfusions. We are committed to ensuring that no patient or family faces panic or crisis due to
+                    a shortage of blood. Through dedicated donor networks and active volunteer participation, we make
+                    urgent blood support possible anytime, anywhere.
+                </p>
+
+                <p className="mt-4">
+                    Along with medical support, we are also working towards building a healthier and greener
+                    environment. Our team regularly organizes <strong>tree plantation drives</strong> to promote clean air,
+                    reduce pollution, and encourage environmental responsibility among communities. We believe that
+                    protecting nature is equally important for protecting life.
+                </p>
+
+                <p className="mt-4">
+                    To further support public welfare, we conduct <strong>free health camps</strong> in rural and
+                    underserved areas. These camps help people with health checkups, awareness on major diseases, early
+                    detection, and access to necessary medical guidance. Many individuals who cannot afford basic
+                    healthcare benefit from these initiatives.
+                </p>
+
+                <p className="mt-4">
+                    In the coming years, our trust is planning to start a <strong>free ambulance service</strong> for the
+                    poor and needy. This service will especially help families who struggle to arrange emergency
+                    transportation during critical situations. Our goal is to ensure that medical help reaches people
+                    on time, without financial burden.
+                </p>
             </div>
 
             {/* Founder Section */}
@@ -50,7 +66,7 @@ const About = () => {
                     <img
                         src={founderImg}
                         alt="Founder"
-                        className="w-64 h-85 object-cover rounded-xl shadow-lg"
+                        className="w-64 h-88 object-fit rounded-xl shadow-lg"
                     />
                 </div>
 
@@ -83,7 +99,9 @@ const About = () => {
                     <li>✔ To promote voluntary blood donation through awareness programs.</li>
                     <li>✔ To organize health camps for underserved communities.</li>
                     <li>✔ To empower youth and encourage them to participate in social welfare.</li>
-                    <li>✔ To build a stronger, healthier, and more supportive society.</li>
+                    <li>✔ To support Thalassemia, cancer, and critical patients with timely help.</li>
+                    <li>✔ To protect the environment through plantation and green initiatives.</li>
+                    <li>✔ To launch a free ambulance service for the poor in the near future.</li>
                 </ul>
             </div>
 
@@ -91,4 +109,4 @@ const About = () => {
     )
 }
 
-export default About
+export default About;
