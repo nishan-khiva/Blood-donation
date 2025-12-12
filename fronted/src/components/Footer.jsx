@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -33,6 +34,11 @@ const Footer = () => {
       </footer>
       <div className="bg-black text-center text-white text-sm py-3 w-full">
         © {new Date().getFullYear()} Designed & Developed by Nishan Singh-9690413852
+        <p className="text-xs text-gray-400 text-center ">
+          <Link to="/adminlogin" className="hover:text-gray-600">
+            Admin Access
+          </Link>
+        </p>
       </div>
 
     </div>
