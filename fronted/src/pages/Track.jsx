@@ -82,7 +82,7 @@ const Track = () => {
             {/* PDF Download Button */}
             {data.certificateUrl && (
               <a
-                href={`http://localhost:5000${data.certificateUrl}`}
+                href={`https://ngo-server-wofi.onrender.com${data.certificateUrl}`}
                 download={`certificate_${data.name}.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
