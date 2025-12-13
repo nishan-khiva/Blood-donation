@@ -9,7 +9,7 @@ import PageNotFound from './pages/PageNotFound'
 import Donate from './pages/Donate'
 import Event from './pages/Event'
 import { Dashboard } from './admin/Dashboard'
-import AdminLayout from "./admin/layout/Adminlayout"
+import AdminLayout from "../src/admin/layout/Adminlayout"
 import AdminEvent from './admin/AdminEvent'
 import Approvals from './admin/Approvels'
 import { Donor } from './admin/Donor'
