@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../api/axiosInstance";
 import toast from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -80,22 +82,31 @@ const AdminLogin = () => {
               <label className="block text-gray-700 font-semibold mb-1">
                 Password
               </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg bg-gray-100 focus:ring-2 focus:ring-red-400 outline-none"
-                placeholder="••••••••••"
-                required
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-2 pr-10 border rounded-lg bg-gray-100 focus:ring-2 focus:ring-red-400 outline-none"
+                  placeholder="••••••••••"
+                  required
+                />
+
+                <span
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-600"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
+
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-all flex items-center justify-center ${
-                loading && "cursor-not-allowed opacity-80"
-              }`}
+              className={`w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-all flex items-center justify-center ${loading && "cursor-not-allowed opacity-80"
+                }`}
             >
               {loading ? (
                 <div className="flex items-center gap-2">

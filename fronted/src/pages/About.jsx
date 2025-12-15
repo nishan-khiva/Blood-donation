@@ -1,5 +1,6 @@
 import React from 'react'
 import founderImg from "../assets/Gurveerimg.jpeg";
+import { FaHandPointRight } from "react-icons/fa";
 
 const About = () => {
     return (
@@ -95,13 +96,13 @@ const About = () => {
                 </h2>
 
                 <ul className="mt-6 space-y-4 text-lg text-gray-700 leading-8">
-                    <li>✔ To provide 24/7 emergency blood support across Uttarakhand.</li>
-                    <li>✔ To promote voluntary blood donation through awareness programs.</li>
-                    <li>✔ To organize health camps for underserved communities.</li>
-                    <li>✔ To empower youth and encourage them to participate in social welfare.</li>
-                    <li>✔ To support Thalassemia, cancer, and critical patients with timely help.</li>
-                    <li>✔ To protect the environment through plantation and green initiatives.</li>
-                    <li>✔ To launch a free ambulance service for the poor in the near future.</li>
+                    <li className='flex gap-2 items-center'><FaHandPointRight /> To provide 24/7 emergency blood support across Uttarakhand.</li>
+                    <li className='flex gap-2 items-center'><FaHandPointRight /> To promote voluntary blood donation through awareness programs.</li>
+                    <li className='flex gap-2 items-center'><FaHandPointRight /> To organize health camps for underserved communities.</li>
+                    <li className='flex gap-2 items-center'><FaHandPointRight /> To empower youth and encourage them to participate in social welfare.</li>
+                    <li className='flex gap-2 items-center'><FaHandPointRight /> To support Thalassemia, cancer, and critical patients with timely help.</li>
+                    <li className='flex gap-2 items-center'><FaHandPointRight /> To protect the environment through plantation and green initiatives.</li>
+                    <li className='flex gap-2 items-center'><FaHandPointRight /> To launch a free ambulance service for the poor in the near future.</li>
                 </ul>
             </div>
 

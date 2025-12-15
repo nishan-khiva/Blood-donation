@@ -68,7 +68,7 @@ export const Request = () => {
       setPhoto(null);
       setPreview(null);
     } catch (err) {
-      toast.error("❌ Error submitting request");
+      toast.error(" Error submitting request");
     } finally {
       setLoading(false);
     }

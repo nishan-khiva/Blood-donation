@@ -5,13 +5,19 @@ import { CheckCircle, XCircle, FileBadge } from "lucide-react";
 const Approvals = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState({ id: null, type: null });
 
   // Fetch all requests
   const getRequests = async () => {
     try {
       const res = await api.get("/api/request/all");
-      console.log(res.data)
-      setRequests(res.data || []);
+
+      // Latest first
+      const sortedRequests = (res.data || []).sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+
+      setRequests(sortedRequests);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching requests:", error);
@@ -26,20 +32,26 @@ const Approvals = () => {
   // Approve Request
   const approveRequest = async (id) => {
     try {
+      setActionLoading({ id, type: "approve" });
       await api.put(`/api/request/approve/${id}`);
-      getRequests(); // Refresh data
+      await getRequests();
     } catch (err) {
       console.error("Approve Error:", err);
+    } finally {
+      setActionLoading({ id: null, type: null });
     }
   };
 
   // Reject Request
   const rejectRequest = async (id) => {
     try {
+      setActionLoading({ id, type: "reject" });
       await api.put(`/api/request/reject/${id}`);
-      getRequests(); // Refresh data
+      await getRequests();
     } catch (err) {
       console.error("Reject Error:", err);
+    } finally {
+      setActionLoading({ id: null, type: null });
     }
   };
 
@@ -47,10 +59,8 @@ const Approvals = () => {
     <div className="p-4 md:p-6">
       <h1 className="text-3xl font-bold mb-6">Approvals</h1>
 
-      {/* Loading */}
       {loading && <p className="text-lg">Loading requests...</p>}
 
-      {/* If No Requests */}
       {!loading && requests.length === 0 && (
         <div className="text-center bg-white p-6 shadow-md rounded-xl">
           <p className="text-xl font-semibold text-gray-600">
@@ -70,6 +80,7 @@ const Approvals = () => {
                 <th className="py-3">Request Type</th>
                 <th className="py-3">Date</th>
                 <th className="py-3">Status</th>
+                <th className="py-3">Phone no</th>
                 <th className="py-3">Actions</th>
               </tr>
             </thead>
@@ -86,32 +97,65 @@ const Approvals = () => {
                   <td className="py-3">
                     {new Date(req.createdAt).toLocaleDateString()}
                   </td>
-
                   <td className="py-3">
-                    <span className="text-yellow-600 font-semibold">
+                    <span
+                      className={`font-semibold ${req.status === "approved"
+                        ? "text-green-600"
+                        : req.status === "rejected"
+                          ? "text-red-600"
+                          : "text-yellow-600"
+                        }`}
+                    >
                       {req.status}
                     </span>
                   </td>
-
+                  <td className="py-3">
+                    {req.phone}
+                  </td>
                   <td className="py-3 flex gap-3">
+                    {/* Approve Button */}
                     <button
                       onClick={() => approveRequest(req._id)}
-                      className="flex items-center gap-1 bg-green-600 text-white px-3 py-1 rounded-lg hover:bg-green-700"
+                      disabled={
+                        req.status !== "pending" ||
+                        (actionLoading.id === req._id && actionLoading.type === "approve")
+                      }
+                      className={`flex items-center gap-1 px-3 py-1 rounded-lg text-white ${req.status === "approved"
+                        ? "bg-green-400 cursor-not-allowed"
+                        : "bg-green-600 hover:bg-green-700"
+                        }`}
                     >
-                      <CheckCircle size={18} /> Approve
+                      {actionLoading.id === req._id && actionLoading.type === "approve"
+                        ? "Approving..."
+                        : <>
+                          <CheckCircle size={18} /> Approve
+                        </>
+                      }
                     </button>
 
+                    {/* Reject Button */}
                     <button
                       onClick={() => rejectRequest(req._id)}
-                      className="flex items-center gap-1 bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700"
+                      disabled={
+                        req.status !== "pending" ||
+                        (actionLoading.id === req._id && actionLoading.type === "reject")
+                      }
+                      className={`flex items-center gap-1 px-3 py-1 rounded-lg text-white ${req.status === "rejected"
+                        ? "bg-red-400 cursor-not-allowed"
+                        : "bg-red-600 hover:bg-red-700"
+                        }`}
                     >
-                      <XCircle size={18} /> Reject
+                      {actionLoading.id === req._id && actionLoading.type === "reject"
+                        ? "Rejecting..."
+                        : <>
+                          <XCircle size={18} /> Reject
+                        </>
+                      }
                     </button>
                   </td>
                 </tr>
               ))}
             </tbody>
-
           </table>
         </div>
       )}
@@ -126,7 +170,14 @@ const Approvals = () => {
             >
               <div className="flex justify-between">
                 <h2 className="text-lg font-bold">{req.name}</h2>
-                <span className="text-sm font-semibold text-yellow-600">
+                <span
+                  className={`text-sm font-semibold ${req.status === "approved"
+                    ? "text-green-600"
+                    : req.status === "rejected"
+                      ? "text-red-600"
+                      : "text-yellow-600"
+                    }`}
+                >
                   {req.status}
                 </span>
               </div>
@@ -141,6 +192,12 @@ const Approvals = () => {
                 <span className="font-semibold">Type:</span> {req.type}
               </p>
 
+              
+              <p className="text-gray-700 flex items-center gap-2 mt-1">
+                <span className="font-semibold">Phone no:</span> {req.phone}
+              </p>
+
+
               <p className="text-gray-700 mt-1">
                 <span className="font-semibold">Date:</span>{" "}
                 {new Date(req.createdAt).toLocaleDateString()}
@@ -149,19 +206,42 @@ const Approvals = () => {
               <div className="flex gap-3 mt-4">
                 <button
                   onClick={() => approveRequest(req._id)}
-                  className="flex items-center justify-center gap-1 flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
+                  disabled={
+                    req.status !== "pending" ||
+                    (actionLoading.id === req._id && actionLoading.type === "approve")
+                  }
+                  className={`flex items-center justify-center gap-1 flex-1 py-2 rounded-lg text-white ${req.status === "approved"
+                    ? "bg-green-400 cursor-not-allowed"
+                    : "bg-green-600 hover:bg-green-700"
+                    }`}
                 >
-                  <CheckCircle size={18} /> Approve
+                  {actionLoading.id === req._id && actionLoading.type === "approve"
+                    ? "Approving..."
+                    : <>
+                      <CheckCircle size={18} /> Approve
+                    </>
+                  }
                 </button>
 
                 <button
                   onClick={() => rejectRequest(req._id)}
-                  className="flex items-center justify-center gap-1 flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700"
+                  disabled={
+                    req.status !== "pending" ||
+                    (actionLoading.id === req._id && actionLoading.type === "reject")
+                  }
+                  className={`flex items-center justify-center gap-1 flex-1 py-2 rounded-lg text-white ${req.status === "rejected"
+                    ? "bg-red-400 cursor-not-allowed"
+                    : "bg-red-600 hover:bg-red-700"
+                    }`}
                 >
-                  <XCircle size={18} /> Reject
+                  {actionLoading.id === req._id && actionLoading.type === "reject"
+                    ? "Rejecting..."
+                    : <>
+                      <XCircle size={18} /> Reject
+                    </>
+                  }
                 </button>
               </div>
-
             </div>
           ))}
         </div>

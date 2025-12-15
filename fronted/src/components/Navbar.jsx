@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -68,9 +69,9 @@ const Navbar = () => {
 
                         <span
                             onClick={() => setDropdownOpen(!dropdownOpen)}
-                            className="hover:text-gray-200"
+                            className="hover:text-gray-200 flex items-center gap-1"
                         >
-                            Request ▾
+                            Request{dropdownOpen ? <FaCaretUp /> : <FaCaretDown />}
                         </span>
 
                         {/* Dropdown Box */}
@@ -126,7 +127,7 @@ const Navbar = () => {
                         <li><Link to="/event" onClick={closeAll} className="block py-2 hover:bg-[#a30618]">Events</Link></li>
 
                         {/* Mobile Dropdown */}
-                        <li>
+                        <li ref={dropdownRef} >
                             <button
                                 className="w-full py-2 hover:bg-[#a30618]"
                                 onClick={() => setDropdownOpen(!dropdownOpen)}
