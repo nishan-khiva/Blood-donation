@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                setDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
 
     const closeAll = () => {
         setMenuOpen(false);
@@ -45,7 +64,7 @@ const Navbar = () => {
                     </li>
 
                     {/* Dropdown - Request */}
-                    <li className="relative flex items-center px-4 cursor-pointer">
+                    <li ref={dropdownRef} className="relative flex items-center px-4 cursor-pointer">
 
                         <span
                             onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -56,7 +75,7 @@ const Navbar = () => {
 
                         {/* Dropdown Box */}
                         {dropdownOpen && (
-                            <ul className="absolute left-0 mt-10 bg-white text-black shadow-md rounded-md w-44 z-50">
+                            <ul className="absolute left-0 mt-[18vh] bg-white text-black shadow-md rounded-md w-44 z-50">
                                 <li>
                                     <Link
                                         to="/track"
