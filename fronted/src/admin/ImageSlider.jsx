@@ -201,7 +201,7 @@ export default function SliderAdmin() {
         {images.map((img) => (
           <div key={img._id} className="bg-white shadow rounded-xl p-3">
             <img
-              src={`${import.meta.env.VITE_API_URL}/${img.image}`}
+              src={`${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/${img.image.replace(/^\/?/, '')}`}
               className="h-40 w-full object-cover rounded"
             />
             <div className="flex gap-2 mt-3">

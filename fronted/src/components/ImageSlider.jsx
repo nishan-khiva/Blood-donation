@@ -57,7 +57,8 @@ export default function ImageSlider() {
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {images.map((src, index) => (
-          <img key={index} src={src} alt={`Slide ${index}`}  className="w-full h-[500px] flex-shrink-0 object-cover " />
+          <img key={index} src={src} alt={`Slide ${index}`}  
+          className="w-full h-[250px] sm:h-[350px] md:h-[500px] flex-shrink-0 object-cover" />
         ))}
       </div>
 
