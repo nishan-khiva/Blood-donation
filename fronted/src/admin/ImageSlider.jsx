@@ -154,7 +154,7 @@ export default function SliderAdmin() {
               image={preview}
               crop={crop}
               zoom={zoom}
-              aspect={16 / 5}   // 👈 slider banner ratio (~500px height feel)
+              aspect={16 / 8}   // 👈 slider banner ratio (~500px height feel)
               onCropChange={setCrop}
               onZoomChange={setZoom}
               onCropComplete={onCropComplete}
