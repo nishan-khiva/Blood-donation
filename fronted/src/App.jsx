@@ -12,7 +12,7 @@ import { Dashboard } from './admin/Dashboard'
 import AdminLayout from "../src/admin/layout/Adminlayout"
 import AdminEvent from './admin/AdminEvent'
 import Approvals from './admin/Approvels'
-import { Donor } from './admin/Donor'
+import SliderAdmin from './admin/ImageSlider'
 import Login from './admin/auth/Login'
 import ProtectedRoute from './admin/auth/ProtectRoute'
 import { Request } from './pages/Request'
@@ -55,7 +55,7 @@ function App() {
           }
         >
           <Route index element={<Dashboard />} />
-          <Route path="donors" element={<Donor />} />
+          <Route path="slider" element={<SliderAdmin />} />
           <Route path="approvals" element={<Approvals />} />
           <Route path="events" element={<AdminEvent />} />
         </Route>

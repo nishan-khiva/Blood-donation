@@ -1,17 +1,38 @@
 import { useState, useEffect } from "react";
 import pic1 from "../assets/pic1.jpg";
-import pic2 from '../assets/pic2.jpg';
-import pic3 from '../assets/pic3.jpg';
-import pic4 from '../assets/pic4.jpg';
+import pic2 from "../assets/pic2.jpg";
+import pic3 from "../assets/pic3.jpg";
+import pic4 from "../assets/pic4.jpg";
+import axios from "axios";
 
 export default function ImageSlider() {
-  const images = [
-    pic1,pic2,pic3,pic4
-  ];
-
+  const defaultImages = [pic1, pic2, pic3, pic4];
+  const [images, setImages] = useState(defaultImages);
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
-  // Auto slide every 3 seconds
+
+  // Fetch images from API
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/slider`);
+        if (res.data && res.data.length > 0) {
+          // Map API response to full image URLs
+          const apiImages = res.data.map(
+            (img) => `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/${img.image.replace(/^\/?/, '')}`
+          );
+          setImages(apiImages);
+        }
+      } catch (error) {
+        console.error("Failed to fetch images, using default", error);
+        setImages(defaultImages);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
+  // Auto slide
   useEffect(() => {
     if (!paused) {
       const interval = setInterval(() => {
@@ -26,7 +47,7 @@ export default function ImageSlider() {
 
   return (
     <div
-      className="relative w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-lg"
+      className="relative w-full max-w-5xl mx-auto overflow-hidden rounded shadow-lg"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -36,7 +57,7 @@ export default function ImageSlider() {
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {images.map((src, index) => (
-          <img key={index} src={src} alt={`Slide ${index}`} className="w-full h-[500px] flex-shrink-0" />
+          <img key={index} src={src} alt={`Slide ${index}`}  className="w-full h-[500px] flex-shrink-0 " />
         ))}
       </div>
 

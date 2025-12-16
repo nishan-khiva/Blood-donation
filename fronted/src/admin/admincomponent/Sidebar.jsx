@@ -41,7 +41,7 @@ const Sidebar = ({ open, setOpen }) => {
 
         <ul className="space-y-3 flex-1">
           <li onClick={closeMenu}><Link to="/admin">Dashboard</Link></li>
-          <li onClick={closeMenu}><Link to="/admin/donors">Donors</Link></li>
+          <li onClick={closeMenu}><Link to="/admin/slider">Manage Slider</Link></li>
           <li onClick={closeMenu}><Link to="/admin/requests">Blood Requests</Link></li>
           <li onClick={closeMenu}><Link to="/admin/approvals">Approvals</Link></li>
           <li onClick={closeMenu}><Link to="/admin/events">Events</Link></li>

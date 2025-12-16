@@ -76,7 +76,7 @@ const Navbar = () => {
 
                         {/* Dropdown Box */}
                         {dropdownOpen && (
-                            <ul className="absolute left-0 mt-[18vh] bg-white text-black shadow-md rounded-md w-44 z-50">
+                            <ul className="absolute left-0 mt-[18vh] bg-white text-black shadow-md rounded-md w-50 z-50">
                                 <li>
                                     <Link
                                         to="/track"
@@ -92,7 +92,7 @@ const Navbar = () => {
                                         className="block px-4 py-2 hover:bg-gray-100"
                                         onClick={closeAll}
                                     >
-                                        Apply
+                                         Apply certificate & Id
                                     </Link>
                                 </li>
                             </ul>
@@ -144,7 +144,7 @@ const Navbar = () => {
                                     </li>
                                     <li>
                                         <Link to="/request" onClick={closeAll} className="block py-2 hover:bg-[#b80a1f]">
-                                            Apply
+                                            Apply certificate & Id
                                         </Link>
                                     </li>
                                 </ul>
