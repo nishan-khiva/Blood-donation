@@ -15,14 +15,14 @@ export default function ImageSlider() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/slider`);
-        if (res.data && res.data.length > 0) {
-          // Map API response to full image URLs
-          const apiImages = res.data.map(
-            (img) => `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/${img.image.replace(/^\/?/, '')}`
-          );
-          setImages(apiImages);
-        }
+        // const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/slider`);
+        // if (res.data && res.data.length > 0) {
+        //   // Map API response to full image URLs
+        //   const apiImages = res.data.map(
+        //     (img) => `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/${img.image.replace(/^\/?/, '')}`
+        //   );
+        //   setImages(apiImages);
+        // }
       } catch (error) {
         console.error("Failed to fetch images, using default", error);
         setImages(defaultImages);
