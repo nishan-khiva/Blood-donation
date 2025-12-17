@@ -91,7 +91,7 @@ const Track = () => {
             )}
 
             {/* ID CARD DOWNLOAD */}
-            {data.type === "id" && data.idCardUrl && (
+            {data.type === "idcard" && data.idCardUrl && (
               <a
                 href={`https://ngo-server-wofi.onrender.com${data.idCardUrl}`}
                 target="_blank"
