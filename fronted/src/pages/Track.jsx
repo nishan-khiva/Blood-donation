@@ -69,26 +69,36 @@ const Track = () => {
             <p className="mt-2">
               Status:{" "}
               <span
-                className={`font-bold ${
-                  data.status === "approved"
+                className={`font-bold ${data.status === "approved"
                     ? "text-green-600"
                     : "text-orange-600"
-                }`}
+                  }`}
               >
                 {data.status.toUpperCase()}
               </span>
             </p>
 
-            {/* PDF Download Button */}
-            {data.certificateUrl && (
+            {/* CERTIFICATE DOWNLOAD */}
+            {data.type === "certificate" && data.certificateUrl && (
               <a
                 href={`https://ngo-server-wofi.onrender.com${data.certificateUrl}`}
-                download={`certificate_${data.name}.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-5 inline-block w-full text-center bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg text-base sm:text-lg"
+                className="mt-5 inline-block w-full text-center bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg text-base sm:text-lg rounded-xl"
               >
-                Download Certificate (PDF)
+                Download Certificate
+              </a>
+            )}
+
+            {/* ID CARD DOWNLOAD */}
+            {data.type === "id" && data.idCardUrl && (
+              <a
+                href={`https://ngo-server-wofi.onrender.com${data.idCardUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-block w-full text-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-base sm:text-lg rounded-xl"
+              >
+                Download ID Card
               </a>
             )}
           </div>
