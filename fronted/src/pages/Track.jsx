@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import api from "../api/axiosInstance";
+const url = import.meta.env.VITE_API_URL
 
 const Track = () => {
   const [phone, setPhone] = useState("");
@@ -81,7 +82,7 @@ const Track = () => {
             {/* CERTIFICATE DOWNLOAD */}
             {data.type === "certificate" && data.certificateUrl && (
               <a
-                href={`https://ngo-server-wofi.onrender.com${data.certificateUrl}`}
+                href={`${url}${data.certificateUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-5 inline-block w-full text-center bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg text-base sm:text-lg rounded-xl"
